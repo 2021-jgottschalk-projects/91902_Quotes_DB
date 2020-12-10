@@ -1,0 +1,52 @@
+﻿Author,Author_ID,Gender,Born,Country1_ID,Country2_ID,Job1_ID,Job2_ID
+Albert Einstein,1,M,1879,6,17,17,24
+Alexandre Dumas fils,2,M,1824,5,,4,18
+Alfred Tennyson,3,M,1809,16,,19,
+Allen Saunders,4,M,1899,17,,4,5
+Andre Gide,5,M,1869,5,,4,
+Ayn Rand,6,F,1905,13,17,4,15
+Bob Marley,7,M,1945,9,17,12,26
+C.S. Lewis,8,M,1898,16,,4,27
+Charles Bukowski,9,M,1920,6,17,19,4
+Charles M. Schulz,10,M,1922,17,,5,
+Douglas Adams,11,M,1952,17,,4,
+Dr. Seuss,12,M,1904,17,,4,8
+E.E. Cummings,13,M,1894,17,,19,14
+Eleanor Roosevelt,14,F,1884,17,,7,20
+Elie Wiesel,15,M,1928,12,17,4,20
+Ernest Hemingway,16,M,1899,17,17,4,
+Friedrich Nietzsche,17,M,1884,6,6,15,
+Garrison Keillor,18,M,1942,17,,4,23
+George Bernard Shaw,19,M,1856,8,17,18,20
+George Carlin,20,M,1937,17,,6,1
+George Eliot,21,F,1819,16,,4,19
+George R.R. Martin,22,M,1948,17,,4,
+Harper Lee,23,F,1926,17,,4,
+Haruki Murakami,24,M,1949,10,,4,
+Helen Keller,25,F,1880,17,,4,20
+J.D. Salinger,26,M,1919,17,,4,
+J.K. Rowling,27,F,1965,16,,4,
+J.M. Barrie,28,M,1860,16,,4,
+J.R.R. Tolkien,29,M,1892,14,16,4,19
+James Baldwin,30,M,1924,17,5,4,18
+Jane Austen,31,F,1775,16,,4,
+Jim Henson,32,M,1936,17,,22,2
+Jimi Hendrix,33,M,1942,17,,12,26
+John Lennon,34,M,1940,16,17,25,26
+Jorge Luis Borges,35,M,1899,2,15,4,19
+Khaled Hosseini,36,M,1965,1,17,4,16
+Madeleine L'Engle,37,F,1918,17,,4,19
+Marilyn Monroe,38,F,1926,17,,1,11
+Mark Twain,39,M,1835,17,,4,
+Martin Luther King Jr.,40,M,1929,17,,21,
+Mother Teresa,41,F,1910,11,7,13,10
+Pablo Neruda,42,M,1904,4,,19,7
+Ralph Waldo Emerson,43,M,1803,17,,19,15
+Stephenie Meyer,44,F,1973,17,,4,
+Steve Martin,45,M,1945,17,,1,6
+Suzanne Collins,46,F,1962,17,,1,
+Terry Pratchett,47,M,1948,16,,4,
+Thomas A. Edison,48,M,1847,17,,9,
+W.C. Fields,49,M,1880,17,,1,6
+William Nicholson,50,M,1872,16,,3,14
+Theodor Herzl,51,M,1869,3,,4,20
