@@ -1,13 +1,26 @@
-<h2>All Results</h2>
-
 <?php
+
+if(!isset($_REQUEST['authorID']))
+{
+    header('Location: index.php');
+}
+
+$author_to_find = $_REQUEST['authorID'];
 
 $find_sql = "SELECT * FROM quotes
 JOIN author ON (`author`.`Author_ID`=`quotes`.`Author_ID`)
-";
+WHERE `quotes`.`Author_ID`= $author_to_find";
 
 $find_query = mysqli_query($dbconnect, $find_sql);
 $find_rs = mysqli_fetch_assoc($find_query);
+
+$author_name = $find_rs['First']." ".$find_rs['Middle']." ".$find_rs['Last'];
+
+?>
+
+<h2><?php echo $author_name; ?> Quotes</h2>
+
+<?php
 
 // Loop through results and dislay them...
 
