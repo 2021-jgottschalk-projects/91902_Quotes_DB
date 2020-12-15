@@ -12,7 +12,7 @@
                     <a class="topnav" href="index.php?page=showall">All</a> | 
                     
                     
-                    <a class="topnav" href="#">Recent</a> | 
+                    <a class="topnav" href="index.php?page=recent">Recent</a> | 
                     <a class="topnav" href="#">Random</a> 
                 </div>  <!-- / common searches -->
             
