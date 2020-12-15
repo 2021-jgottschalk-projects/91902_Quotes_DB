@@ -13,7 +13,7 @@
                     
                     
                     <a class="topnav" href="index.php?page=recent">Recent</a> | 
-                    <a class="topnav" href="#">Random</a> 
+                    <a class="topnav" href="index.php?page=random">Random</a> 
                 </div>  <!-- / common searches -->
             
                 <div class="topsearch">
