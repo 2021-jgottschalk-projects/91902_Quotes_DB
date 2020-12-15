@@ -35,7 +35,7 @@
     } // end country if
   
     // break reference with the last element as per the manual
-    unset($subject);
+    unset($country);
         
     }
     

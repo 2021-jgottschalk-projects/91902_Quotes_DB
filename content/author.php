@@ -30,7 +30,12 @@ $author_name = $find_rs['First']." ".$find_rs['Middle']." ".$find_rs['Last'];
     
     <?php
     // get country
-include("show_country.php");
+    include("show_country.php");
+    
+    
+    // get career
+    include("show_career.php")
+    
         ?>
         
 
