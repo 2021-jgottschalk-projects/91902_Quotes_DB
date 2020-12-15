@@ -12,11 +12,20 @@
     $sub_query = mysqli_query($dbconnect, $sub_sql);
     $sub_rs = mysqli_fetch_assoc($sub_query);
         
-    ?>
+    if ($subject != 0)
+    {
         
+    ?>
+    
+
+    
     <span class="tag"><?php echo $sub_rs['Subject']; ?> </span> &nbsp;
+    
+   
       
     <?php
+        
+     }  // end check subject if
   
     // break reference with the last element as per the manual
     unset($subject);

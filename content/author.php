@@ -33,7 +33,7 @@ $author_name = $find_rs['First']." ".$find_rs['Middle']." ".$find_rs['Last'];
 include("show_country.php");
         ?>
         
-    </p>
+
     
 </div>
 
