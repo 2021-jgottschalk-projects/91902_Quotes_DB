@@ -112,6 +112,8 @@ h1, h2, h3, h4 {
 .tag {
     background-color: bisque;
     padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;    
     border: solid 1px #000;
     border-radius: 5px;
 }
@@ -133,9 +135,9 @@ h1, h2, h3, h4 {
 }
 
 /* Navigation Links */
-.nav a {font-weight: bold;}
-.nav a:link, .nav a:visited {color: #007c72;} /*dark teal */
-.nav a:hover {color: #707a00; text-decoration: none;} /* chocolate brown */
+a.topnav {font-weight: bold;}
+a.topnav:link, a.topnav:visited {color: #007c72;} /*dark teal */
+a.topnav:hover {color: #707a00; text-decoration: none;} 
 
 
 /* links in page */
@@ -144,6 +146,10 @@ a:link{color: #007c72;} /* dark teal */
 a:visited{color: #222;} /* dark grey */
 a:hover{color: #707a00;}    /* Dark Green*/
 
+
+/* Home link at top left */
+a.backhome:link, a.backhome:visited {color: #fff;}
+a.backhome:hover {color: bisque;}
 
 
 /* Sub Heading Formatting */

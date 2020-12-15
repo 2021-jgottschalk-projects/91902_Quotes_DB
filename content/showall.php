@@ -14,26 +14,10 @@ $find_rs = mysqli_fetch_assoc($find_query);
 do { ?>
 
 <div class="results">
-<p>
-    
-    
-    <?php
-    // remove non-standard characters from quotes
-    $quote = preg_replace('/[^A-Za-z0-9.,\s\'\-]/', ' ', $find_rs['Quote']);
-    echo $quote."<br />";
-    ?>
-    
-    
-    <i>  
-        <a href="index.php?page=author&authorID=<?php echo $find_rs['Author_ID']; ?>">
-        <?php echo $find_rs['First']; ?> 
-         <?php echo $find_rs['Middle']; ?> 
-        <?php echo $find_rs['Last']; ?>
-        </a>
-    </i>
-</p>
+
     
 <?php
+    include("show_results.php");
     include("show_subjects.php");
     ?>
     
