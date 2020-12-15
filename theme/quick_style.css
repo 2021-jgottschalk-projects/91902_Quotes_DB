@@ -108,6 +108,26 @@ h1, h2, h3, h4 {
     font-family: 'Ubuntu', sans-serif;
 }
 
+/* Tag formatting */
+.tag {
+    background-color: bisque;
+    padding: 5px;
+    border: solid 1px #000;
+    border-radius: 5px;
+}
+
+.country {
+    background-color: white;
+    }
+
+.about {
+    background-color: bisque;
+    border: solid 1px #d37000;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+
 /* Navigation Links */
 .nav a {font-weight: bold;}
 .nav a:link, .nav a:visited {color: #007c72;} /*dark teal */
