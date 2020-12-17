@@ -5,8 +5,12 @@
 
 <?php
 if(isset($_GET['error'])) {
-	echo "<span class=\"error\">Incorrect username / password</span>";
-	}
+    
+    ?>
+	<span class="error"><?php echo $_GET['error'] ?></span>
+    
+	<?php
+}
 ?>
 
 <p><input type="submit" name="login" value="Log In" /></p>

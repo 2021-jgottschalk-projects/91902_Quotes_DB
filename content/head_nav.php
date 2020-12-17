@@ -37,7 +37,7 @@
                         
                     ?>
                     
-                    <a class="topnav" href="index.php?page=../admin/logout">Log Out</a>
+                    <a class="topnav" href="index.php?page=../admin/admin_panel">Admin</a>
                     
                     <?php
                 }   // end in admin mode if
