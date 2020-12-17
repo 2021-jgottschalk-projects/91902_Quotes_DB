@@ -30,7 +30,7 @@
                 </div>  <!-- / top search -->
                 
                 <div class="topadmin">
-                    <a class="topnav" href="admin/admin.php">Log In</a>
+                    <a class="topnav" href="index.php?page=login">Log In</a>
                     
                 </div>  <!-- / top admin -->
                 
