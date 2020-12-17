@@ -19,7 +19,7 @@
                 <div class="topsearch">
                     
                     <!-- Quick Search -->           
-                    <form method="post" action="quick_search.php" enctype="multipart/form-data">
+                    <form method="post" action="index.php?page=quick_search" enctype="multipart/form-data">
 
                         <input class="search quicksearch" type="text" name="quick_search" size="40" value="" required placeholder="Quick Search..." />
 
@@ -30,7 +30,7 @@
                 </div>  <!-- / top search -->
                 
                 <div class="topadmin">
-                    <a class="topnav" href="#">Log In</a>
+                    <a class="topnav" href="admin/admin.php">Log In</a>
                     
                 </div>  <!-- / top admin -->
                 
