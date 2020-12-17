@@ -30,7 +30,27 @@
                 </div>  <!-- / top search -->
                 
                 <div class="topadmin">
-                    <a class="topnav" href="index.php?page=login">Log In</a>
+                    
+                    <?php 
+                    
+                    if (isset($_SESSION['admin'])) {
+                        
+                    ?>
+                    
+                    <a class="topnav" href="index.php?page=../admin/logout">Log Out</a>
+                    
+                    <?php
+                }   // end in admin mode if
+
+                    else {
+                    
+                    ?>
+                    
+                    <a class="topnav" href="index.php?page=../admin/login">Log In</a>
+                    
+                    <?php
+                    }   // end log in mode else
+                        ?>
                     
                 </div>  <!-- / top admin -->
                 

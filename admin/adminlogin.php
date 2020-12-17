@@ -24,14 +24,14 @@ if(isset($_REQUEST['login'])) {
     else {
     echo 'Invalid password.';
     unset($_SESSION);
-    header("Location: index.php?page=login&error=login");
+    header("Location: index.php?page=../admin/login&error=login");
 }
     
 }
 
 
 if (isset($_SESSION['admin'])) {
-	header('Location: index.php?page=success');
+	header('Location: index.php?page=../admin/success');
 }
 
 
