@@ -77,20 +77,8 @@ $all_subjects = autocomplete_list($dbconnect, $all_tags_sql, 'Subject');
 
 // get country list from database
 $all_countries_sql="SELECT * FROM `country` ORDER BY `Country` ASC ";
-$all_countries_query = mysqli_query($dbconnect, $all_countries_sql);
-$all_countries_rs = mysqli_fetch_assoc($all_countries_query);
+$all_countries = autocomplete_list($dbconnect, $all_countries_sql, 'Country');
 
-
-
-// Countries array...
-while($row=mysqli_fetch_array($all_countries_query))
-{
-  $country=$row['Country'];
-  $countries[] = $country;
-}
-
-$all_countries=json_encode($countries);
-// echo "countries".$all_countries
 
 // if author not known, initialise variables and set up error messages
 
