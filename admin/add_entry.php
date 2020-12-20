@@ -3,6 +3,12 @@
 // function to get subject ID
 function get_subjectID ($dbconnect, $subject)
 {
+    
+    if($subject == "")
+    {
+        return 0
+    }
+    
     // get subject ID's if they exist...
     $subid_sql = "SELECT * FROM `subject` WHERE `Subject` LIKE '$subject'";
     $subid_query = mysqli_query($dbconnect, $subid_sql);
@@ -89,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subjectID_2 = get_subjectID($dbconnect, $tag_2);
     $subjectID_3 = get_subjectID($dbconnect, $tag_3);
     
+        
     echo "tag 1: ".$subjectID_1."<br />";
     echo "tag 2: ".$subjectID_2."<br />";
     echo "tag 3: ".$subjectID_3."<br />";
