@@ -79,6 +79,8 @@ $all_subjects = autocomplete_list($dbconnect, $all_tags_sql, 'Subject');
 $all_countries_sql="SELECT * FROM `country` ORDER BY `Country` ASC ";
 $all_countries = autocomplete_list($dbconnect, $all_countries_sql, 'Country');
 
+$all_occupations_sql = "SELECT * FROM `career` ORDER BY `Career` ASC ";
+$all_occupations = autocomplete_list($dbconnect, $all_occupations_sql, 'Career');
 
 // if author not known, initialise variables and set up error messages
 
@@ -278,6 +280,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <br/><br />
     
+    
+    <div class="autocomplete">
+        <input id="occupation1" type="text" name="occupation1" placeholder="Occupation 1 (Start Typing)...">
+    </div>
+    
+    <br/><br />
     
     <?php
         
