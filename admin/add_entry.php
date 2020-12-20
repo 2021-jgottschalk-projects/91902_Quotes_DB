@@ -25,13 +25,61 @@ $tag_1 = "";
 $tag_2 = "";
 $tag_3 = "";
 
+// initialise tag ID's
+$tag_1_ID = $tag_2_ID = $tag_3_ID = 0;
+
 $has_errors = "no";
 
 // set up error fields / visibility
 $quote_error = $tag_1_error =  "no-error";
 $quote_field = $tag_1_field = "form-ok";
 
-
+// Code below excutes when the form is submitted...
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    // get values from form
+    $quote = mysqli_real_escape_string($dbconnect, $_POST['quote']);
+    $notes = mysqli_real_escape_string($dbconnect, $_POST['notes']);
+    $tag_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
+    $tag_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
+    $tag_3 = mysqli_real_escape_string($dbconnect, $_POST['Subject_3']);
+    
+    // put checking code here in due course...
+    
+    
+    
+    // get subject ID's if they exist...
+    $subid_sql = "SELECT * FROM `subject` WHERE `Subject` LIKE '$tag_1'";
+    $subid_query = mysqli_query($dbconnect, $subid_sql);
+    $subid_rs = mysqli_fetch_assoc($subid_query);
+    $subid_count=mysqli_num_rows($subid_query);
+    
+    
+    // if subject ID does not exist, add new subject to database
+    if($subid_count > 0) {
+        $tag_1_ID = $subid_rs['Subject_ID'];
+    }
+    
+    else {
+        $add_subject_sql ="INSERT INTO `subject` (`Subject_ID`, `Subject`) VALUES (NULL, '$tag_1');";
+        $add_subject_query = mysqli_query($dbconnect, $add_subject_sql);
+        
+        // get subject ID
+        
+        $new_sub_sql = "SELECT * FROM `subject` WHERE `Subject` LIKE '$tag_1'";
+        $new_sub_query = ($dbconnect, $new_sub_sql);
+        $new_sub_rs = mysqli_fetch_assoc($new_sub_query);
+        
+        $tag_1_ID = $new_sub_rs['Subject_ID'];
+        
+    }
+    
+    // add entry to database
+    
+    
+    // get quote ID for next page
+    
+}   // end button pushed if
 
 ?>
 
