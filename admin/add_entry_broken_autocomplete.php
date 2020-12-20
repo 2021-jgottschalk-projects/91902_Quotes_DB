@@ -1,6 +1,5 @@
 <?php
 
-
 // function to get subject ID
 function get_subjectID ($dbconnect, $subject)
 {
@@ -48,7 +47,8 @@ function get_subjectID ($dbconnect, $subject)
 
 
 // entity is subject, country, occupation etc
-function autocomplete_list($dbconnect, $item_sql, $entity)    
+function autocomplete_list($dbconnect, $item_sql, $entity)
+    
 {
 // Get entity / topic list from database
 $all_items_query = mysqli_query($dbconnect, $item_sql);
@@ -66,7 +66,6 @@ return $all_items;
     
 }
 
-
 $author_ID = $_SESSION['Add_Quote'];
 echo $author_ID;
 
@@ -74,23 +73,12 @@ echo $author_ID;
 $all_tags_sql = "SELECT * FROM `subject` ORDER BY `Subject` ASC ";
 $all_subjects = autocomplete_list($dbconnect, $all_tags_sql, 'Subject');
 
-
 // get country list from database
 $all_countries_sql="SELECT * FROM `country` ORDER BY `Country` ASC ";
-$all_countries_query = mysqli_query($dbconnect, $all_countries_sql);
-$all_countries_rs = mysqli_fetch_assoc($all_countries_query);
+$all_countries = autocomplete_list($dbconnect, $all_countries_sql, 'Country');
 
-
-
-// Countries array...
-while($row=mysqli_fetch_array($all_countries_query))
-{
-  $country=$row['Country'];
-  $countries[] = $country;
-}
-
-$all_countries=json_encode($countries);
-// echo "countries".$all_countries
+/* $all_occupations_sql="SELECT * FROM `career` ORDER BY `Career` ASC ";
+$all_occupations = autocomplete_list($dbconnect, $all_occupations_sql, 'Career'); */
 
 // if author not known, initialise variables and set up error messages
 
@@ -279,16 +267,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <br /><br />
     
     <div class="autocomplete">
-        <input id="country1" type="text" name="country1" placeholder="Country 1 (Start Typing)...">
+        <input id="country1" value="<?php echo $country_1; ?>" type="text" name="country1" placeholder="Country 1 (Start Typing)...">
     </div>
     
     <br/><br />
     
     <div class="autocomplete">
-        <input id="country2" type="text" name="country2" placeholder="Country 2 (Start Typing)...">
+        <input id="country2" value="<?php echo $country_2; ?>" type="text" name="country2" placeholder="Country 2 (Start Typing)...">
     </div>
     
     <br/><br />
+    
+
     
     
     <?php
@@ -342,20 +332,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- script to make autocomplete work -->
 <script>
 
-/* bunch of functions to make autocomplete work */
+/* bunch of functions to make autocomplete work, from W3C schools */
 <?php include("autocomplete.php"); ?>
     
-/*An array containing all the country names in the world:*/
+    
+/* Create arrays for auto complete fiels */
 var all_tags = <?php print("$all_subjects"); ?>
-
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("subject1"), all_tags);
 autocomplete(document.getElementById("subject2"), all_tags);
 autocomplete(document.getElementById("subject3"), all_tags);
     
 var all_countries = <?php print("$all_countries"); ?>
-
 autocomplete(document.getElementById("country1"), all_countries);
 autocomplete(document.getElementById("country2"), all_countries);
+
+
+
 
 </script>
