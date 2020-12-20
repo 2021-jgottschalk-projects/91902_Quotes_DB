@@ -6,7 +6,7 @@ function get_subjectID ($dbconnect, $subject)
     
     if($subject == "")
     {
-        return 0
+        return 0;
     }
     
     // get subject ID's if they exist...
@@ -77,7 +77,8 @@ $has_errors = "no";
 
 // set up error fields / visibility
 $quote_error = $tag_1_error =  "no-error";
-$quote_field = $tag_1_field = "form-ok";
+$quote_field = "form-ok";
+$tag_1_field = "tag-ok";
 
 // Code below excutes when the form is submitted...
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -91,6 +92,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // put checking code here in due course...
     
+        // check Developer name is not blank
+    if ($quote == "Please type your quote here") {
+        $has_errors = "yes";
+        $quote_error = "error-text";
+        $quote_field = "form-error";
+        }
+    
+    if ($tag_1 == "") {
+        $has_errors = "yes";
+        $tag_1_error = "error-text";
+        $tag_1_field = "tag-error";
+        }
+    
+    // Get subject ID's via get_subjectID function...
     $subjectID_1 = get_subjectID($dbconnect, $tag_1);
     $subjectID_2 = get_subjectID($dbconnect, $tag_2);
     $subjectID_3 = get_subjectID($dbconnect, $tag_3);
@@ -135,8 +150,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <br/><br />
     
+    <div class="<?php echo $tag_1_error ?>">
+        Please enter at least one subject tag
+    </div>
     <div class="autocomplete">
-        <input id="subject1" type="text" name="Subject_1" placeholder="Subject 1(Start Typing)...">
+        <input class="<?php echo $tag_1_field; ?>" id="subject1" type="text" name="Subject_1" placeholder="Subject 1(Start Typing)...">
     </div>
     
     <br/><br />
