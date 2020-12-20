@@ -280,9 +280,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <br/><br />
     
+    <div class="autocomplete">
+        <input id="occupation1" type="text" name="occupation1" placeholder="Occupation 1 (Required, Start Typing)...">
+    </div>
+    
+    <br/><br />
     
     <div class="autocomplete">
-        <input id="occupation1" type="text" name="occupation1" placeholder="Occupation 1 (Start Typing)...">
+        <input id="occupation2" type="text" name="occupation2" placeholder="Occupation 2 (Start Typing)...">
     </div>
     
     <br/><br />
@@ -341,10 +346,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 /* bunch of functions to make autocomplete work */
 <?php include("autocomplete.php"); ?>
     
-/*An array containing all the country names in the world:*/
+/* Arrays containing lists.  Spaces between sections appear to matter (as in if they are missing, the code breaks) */
 var all_tags = <?php print("$all_subjects"); ?>
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("subject1"), all_tags);
 autocomplete(document.getElementById("subject2"), all_tags);
 autocomplete(document.getElementById("subject3"), all_tags);
@@ -354,7 +358,10 @@ var all_countries = <?php print("$all_countries"); ?>
 autocomplete(document.getElementById("country1"), all_countries);
 autocomplete(document.getElementById("country2"), all_countries);
 
+var all_occupations = <?php print("$all_occupations"); ?>
 
+autocomplete(document.getElementById("occupation1"), all_occupations);
+autocomplete(document.getElementById("occupation2"), all_occupations);
 
 
 </script>
