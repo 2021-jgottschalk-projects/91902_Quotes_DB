@@ -49,17 +49,12 @@ $author_ID = $_SESSION['Add_Quote'];
 echo $author_ID;
 
 // Get subject / topic list from database
-$all_tags_sql = "SELECT * FROM `subject` ORDER BY `Subject` ASC ";
+$all_tags_sql = "SELECT * FROM `subject` ORDER BY `Subject_ID` ASC ";
 $all_tags_query = mysqli_query($dbconnect, $all_tags_sql);
 $all_tags_rs = mysqli_fetch_assoc($all_tags_query);
 
 
-// get country list from database
-$all_countries_sql="SELECT * FROM `country` ORDER BY `Country` ASC ";
-$all_countries_query = mysqli_query($dbconnect, $all_countries_sql);
-$all_countries_rs = mysqli_fetch_assoc($all_countries_query);
-
-// Make subject arrays for autocomplete functionality...
+// Make subject array for autocomplete functionality...
 while($row=mysqli_fetch_array($all_tags_query))
 {
   $subject=$row['Subject'];
@@ -68,43 +63,7 @@ while($row=mysqli_fetch_array($all_tags_query))
 
 $all_subjects=json_encode($subjects);
 
-// Countries array...
-while($row=mysqli_fetch_array($all_countries_query))
-{
-  $country=$row['Country'];
-  $countries[] = $country;
-}
-
-$all_countries=json_encode($countries);
-// echo "countries".$all_countries
-
-// if author not known, initialise variables and set up error messages
-
-if($author_ID=="unknown")
-{
-    $first = "";
-    $middle = "";
-    $last = "";
-    $yob = "";
-    $gender = "";
-    $country_1 = "";
-    $country_2 = "";
-    $occupation_1 = "";
-    $occupation_2 = "";
-    
-    // Initialise country and occupation ID's
-    $country_1_ID = $country_2_ID = $occupation_1_ID = $occupation_2_ID = 0;
-        
-    // set up error fields / visibility
-    $first_error = $last_error = $yob_error = $gender_error = $country_1_error = $occupation_1_error = "no-error";
-    
-    $first_field = $last_field = $yob_field = $gender_field = "form-ok";
-    $country_1_field = $occupation_1_field = "tag-ok";
-        
-}
-
-
-// initialise form variables for quote
+// initialise form variables
 $quote = "Please type your quote here";
 $notes = "";
 $tag_1 = "";
@@ -124,22 +83,7 @@ $tag_1_field = "tag-ok";
 // Code below excutes when the form is submitted...
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // if author is unknown, get values from author part of form
-    if($author_ID=="unknown")
-    {
-    $first = mysqli_real_escape_string($dbconnect, $_POST['first']); 
-    $middle = mysqli_real_escape_string($dbconnect, $_POST['middle']); 
-    $last = mysqli_real_escape_string($dbconnect, $_POST['last']); 
-    $yob = mysqli_real_escape_string($dbconnect, $_POST['yob']); 
-    $gender = mysqli_real_escape_string($dbconnect, $_POST['gender']); 
-    $country_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
-    $country_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
-    $occupation_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
-    $occupation_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
-        
-    }   // end of getting new author values
-    
-    // get values from quote secion of form
+    // get values from form
     $quote = mysqli_real_escape_string($dbconnect, $_POST['quote']);
     $notes = mysqli_real_escape_string($dbconnect, $_POST['notes']);
     $tag_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
@@ -148,48 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // put checking code here in due course...
     
-    if ($author_ID=="unknown")
-    {
-        if ($first == "") {
-        $has_errors = "yes";
-        $first_error = "error-text";
-        $first_field = "form-error";
-        }
-        
-        if ($last == "") {
-        $has_errors = "yes";
-        $last_error = "error-text";
-        $last_field = "form-error";
-        }
-        
-        if ($gender == "") {
-        $has_errors = "yes";
-        $gender_error = "error-text";
-        $gender_field = "form-error";
-        }
-        
-        if ($country_1 == "") {
-        $has_errors = "yes";
-        $country_1_error = "error-text";
-        $country_1_field = "tag-error";
-        }
-        
-        if ($occupation_1 == "") {
-        $has_errors = "yes";
-        $occupation_1_error = "error-text";
-        $occupation_1_field = "tag-error";
-        }
-        
-    }
-    
-    // check quote name is not blank
+        // check Developer name is not blank
     if ($quote == "Please type your quote here") {
         $has_errors = "yes";
         $quote_error = "error-text";
         $quote_field = "form-error";
         }
     
-    // check that first subject has been filled in
     if ($tag_1 == "") {
         $has_errors = "yes";
         $tag_1_error = "error-text";
@@ -228,60 +137,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>" enctype="multipart/form-data">
     
-    
-    <?php
-    
-    if ($author_ID=="unknown")
-    {
-            
-        ?>
-    <!-- Get author details if not known -->
-    <div class="<?php echo $first_error; ?>">
-        Author's first name can't be blank
-    </div>
-    
-    <input class="add-field <?php echo $first_field; ?>" type="text" name="first" value="<?php echo $first; ?>" placeholder="Author's First Name" />
-            
-    <br /><br />
-    
-    <input class="add-field <?php echo $middle_field; ?>" type="text" name="middle" value="<?php echo $middle; ?>" placeholder="Author's Middle Name (optional)" />
-            
-    <br /><br />
-    
-    <div class="<?php echo $last_error; ?>">
-        Author's last name can't be blank
-    </div>
-    
-    <input class="add-field <?php echo $yob_field; ?>" type="text" name="last" value="<?php echo $last; ?>" placeholder="Author's Year of Birth" />
-            
-    <br /><br />
-    
-    <div class="<?php echo $yob_error; ?>">
-        Author's Year of Birth can't be blank
-    </div>
-    
-    <input class="add-field <?php echo $yob_field; ?>" type="text" name="yob" value="<?php echo $yob; ?>" placeholder="Author's First Name" />
-            
-    <br /><br />
-    
-    <div class="autocomplete">
-        <input id="country1" type="text" name="country1" placeholder="Country 1 (Start Typing)...">
-    </div>
-    
-    <br/><br />
-    
-    <div class="autocomplete">
-        <input id="country2" type="text" name="country2" placeholder="Country 2 (Start Typing)...">
-    </div>
-    
-    <br/><br />
-    
-    
-    <?php
-        
-    } // end unknown author if / form
-    
-    ?>
 
     <!-- Quote text area -->
     <div class="<?php echo $quote_error; ?>">
@@ -339,9 +194,4 @@ autocomplete(document.getElementById("subject1"), all_tags);
 autocomplete(document.getElementById("subject2"), all_tags);
 autocomplete(document.getElementById("subject3"), all_tags);
     
-var all_countries = <?php print("$all_countries"); ?>
-
-autocomplete(document.getElementById("country1"), all_countries);
-autocomplete(document.getElementById("country2"), all_countries);
-
 </script>
