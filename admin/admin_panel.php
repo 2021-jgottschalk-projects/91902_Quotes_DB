@@ -85,7 +85,7 @@ if (isset($_SESSION['admin'])) {
             
         &nbsp;
             
-        <input type="submit" name="quote_author" value="Next..." />
+        <input class="short" type="submit" name="quote_author" value="Next..." />
             
         </div>  <!-- end select author -->
                 

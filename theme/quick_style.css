@@ -307,6 +307,10 @@ input {
     width:  95%;
 }
 
+input.short {
+    width: 100px;
+}
+
 
 .quicksearch {
     border-radius: 5px 0 0 5px; 
@@ -333,6 +337,7 @@ textarea {
 }
 
 
+
 /* Form Error CSS */
 
 /* field backgrounds */
@@ -353,12 +358,6 @@ textarea {
 .error-text {
     color: darkred;
 }
-
-
-
-
-
-
 
 
 
