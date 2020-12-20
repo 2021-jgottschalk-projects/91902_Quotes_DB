@@ -346,4 +346,7 @@ var all_countries = <?php print("$all_countries"); ?>
 autocomplete(document.getElementById("country1"), all_countries);
 autocomplete(document.getElementById("country2"), all_countries);
 
+
+
+
 </script>
