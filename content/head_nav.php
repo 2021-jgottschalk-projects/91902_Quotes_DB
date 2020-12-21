@@ -37,7 +37,9 @@
                         
                     ?>
                     
-                    <a class="topnav" href="index.php?page=../admin/admin_panel">Admin</a>
+                    <a class="topnav" href="index.php?page=../admin/admin_panel">Add Quote</a> | 
+                    
+                    <a class="topnav" href="index.php?page=../admin/logout">Logout</a>
                     
                     <?php
                 }   // end in admin mode if
