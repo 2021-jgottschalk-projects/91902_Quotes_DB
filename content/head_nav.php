@@ -37,7 +37,7 @@
                         
                     ?>
                     
-                    <a class="topnav" href="index.php?page=../admin/admin_panel">Add Quote</a> | 
+                    <a class="topnav" href="index.php?page=../admin/new_quote">Add Quote</a> | 
                     
                     <a class="topnav" href="index.php?page=../admin/logout">Logout</a>
                     
