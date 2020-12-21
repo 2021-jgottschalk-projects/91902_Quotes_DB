@@ -90,7 +90,7 @@ if($author_ID=="unknown")
     $middle = "";
     $last = "";
     $yob = "";
-    $gender = "";
+    $gender_code = "";
     $country_1 = "";
     $country_2 = "";
     $occupation_1 = "";
@@ -135,7 +135,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $middle = mysqli_real_escape_string($dbconnect, $_POST['middle']); 
     $last = mysqli_real_escape_string($dbconnect, $_POST['last']); 
     $yob = mysqli_real_escape_string($dbconnect, $_POST['yob']); 
-    $gender = mysqli_real_escape_string($dbconnect, $_POST['gender']); 
+        
+    $gender_code = mysqli_real_escape_string($dbconnect, $_POST['gender']); 
+    if ($gender_code=="F") {
+        $gender = "Female";
+    }
+    else if ($gender_code=="M") {
+            $gender = "Male";
+        }
+        
+    else {
+        $gender = "";
+    }
+        
     $country_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
     $country_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
     $occupation_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
@@ -205,10 +217,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subjectID_2 = get_subjectID($dbconnect, $tag_2);
     $subjectID_3 = get_subjectID($dbconnect, $tag_3);
     
-        
-    echo "tag 1: ".$subjectID_1."<br />";
-    echo "tag 2: ".$subjectID_2."<br />";
-    echo "tag 3: ".$subjectID_3."<br />";
     
     // add entry to database
     $addentry_sql = "INSERT INTO `quotes` (`ID`, `Author_ID`, `Quote`, `Notes`, `Subject1_ID`, `Subject2_ID`, `Subject3_ID`) VALUES (NULL, '$author_ID', '$quote', '$notes', '$subjectID_1', '$subjectID_2', '$subjectID_3');";
@@ -258,6 +266,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <input class="add-field <?php echo $yob_field; ?>" type="text" name="last" value="<?php echo $last; ?>" placeholder="Author's Year of Birth" />
             
+    <br /><br />
+    
+    <select class="adv <?php echo $gender_field; ?>" name="gender">
+        
+        <?php 
+        if($gender_code=="") {
+        ?>
+            
+        <option value="" selected>Gender (Choose something)... </option>
+        
+        <?php
+        }
+        
+        else {
+            ?>
+        <option value="<?php echo $gender_code;?>" selected><?php echo $gender; ?></option>
+        
+        <?php
+        
+        }
+        ?>
+        
+        <option value="F">Female</option>
+        <option value="M">Male</option>
+        
+    </select>
+    
     <br /><br />
     
     <div class="<?php echo $yob_error; ?>">
@@ -346,22 +381,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 /* bunch of functions to make autocomplete work */
 <?php include("autocomplete.php"); ?>
     
-/* Arrays containing lists.  Spaces between sections appear to matter (as in if they are missing, the code breaks) */
-var all_tags = <?php print("$all_subjects"); ?>
-
+/* Arrays containing lists. */
+var all_tags = <?php print("$all_subjects"); ?>;
 autocomplete(document.getElementById("subject1"), all_tags);
 autocomplete(document.getElementById("subject2"), all_tags);
 autocomplete(document.getElementById("subject3"), all_tags);
     
-var all_countries = <?php print("$all_countries"); ?>
-
+var all_countries = <?php print("$all_countries"); ?>;
 autocomplete(document.getElementById("country1"), all_countries);
 autocomplete(document.getElementById("country2"), all_countries);
 
-var all_occupations = <?php print("$all_occupations"); ?>
-
+var all_occupations = <?php print("$all_occupations"); ?>;
 autocomplete(document.getElementById("occupation1"), all_occupations);
 autocomplete(document.getElementById("occupation2"), all_occupations);
-
 
 </script>
