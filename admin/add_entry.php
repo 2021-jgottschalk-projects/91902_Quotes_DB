@@ -1,52 +1,6 @@
 <?php
 
 
-// function to get subject ID
-function get_subjectID ($dbconnect, $subject)
-{
-    
-    if($subject == "")
-    {
-        return 0;
-    }
-    
-    // get subject ID's if they exist...
-    $subid_sql = "SELECT * FROM `subject` WHERE `Subject` LIKE '$subject'";
-    $subid_query = mysqli_query($dbconnect, $subid_sql);
-    $subid_rs = mysqli_fetch_assoc($subid_query);
-    $subid_count=mysqli_num_rows($subid_query);
-    
-    
-    // if subject ID does not exist, add new subject to database
-    
-    if($subid_count > 0) {
-        $subject_ID = $subid_rs['Subject_ID'];
-        
-        echo "Subject ID".$subject_ID;
-        
-        return $subject_ID;
-    }
-    
-    else {
-        $add_subject_sql ="INSERT INTO `subject` (`Subject_ID`, `Subject`) VALUES (NULL, '$subject');";
-        $add_subject_query = mysqli_query($dbconnect, $add_subject_sql);
-        
-        // get subject ID
-        
-        $new_sub_sql = "SELECT * FROM `subject` WHERE `Subject` LIKE '$subject'";
-        $new_sub_query = mysqli_query($dbconnect, $new_sub_sql);
-        $new_sub_rs = mysqli_fetch_assoc($new_sub_query);
-        
-        $subject_ID = $new_sub_rs['Subject_ID'];
-        
-        echo "Subject ID".$subject_ID;
-        
-        return $subject_ID;
-        
-    }
-}
-
-
 // entity is subject, country, occupation etc
 function autocomplete_list($dbconnect, $item_sql, $entity)    
 {
@@ -148,10 +102,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $gender = "";
     }
         
-    $country_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
-    $country_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
-    $occupation_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
-    $occupation_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
+    $country_1 = mysqli_real_escape_string($dbconnect, $_POST['country1']);
+    $country_2 = mysqli_real_escape_string($dbconnect, $_POST['country2']);
+    $occupation_1 = mysqli_real_escape_string($dbconnect, $_POST['occupation1']);
+    $occupation_2 = mysqli_real_escape_string($dbconnect, $_POST['occupation2']);
         
     }   // end of getting new author values
     
@@ -196,7 +150,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $occupation_1_field = "tag-error";
         }
         
-    }
+        // get country and occupation IDs
+        $countryID_1 = get_ID($dbconnect, 'country', 'Country_ID', 'Country', $country_1);
+        $countryID_2 = get_ID($dbconnect, 'country', 'Country_ID', 'Country', $country_2);
+        
+        $occupationID_1 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_1);
+        $occupationID_2 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_2);
+            
+        // add author to database
+        $add_author_sql = "INSERT INTO `author` (`Author_ID`, `First`, `Middle`, `Last`, `Gender`, `Born`, `Country1_ID`, `Country2_ID`, `Career1_ID`, `Career2_ID`) VALUES (NULL, '$first', '$middle', '$last', '$gender_code', '$yob', '$countryID_1', '$countryID_2', '$occupationID_1', '$occupationID_2');";
+        $add_author_query = mysqli_query($dbconnect, $add_author_sql);
+        
+        // Get Author ID
+        $find_author_sql = "SELECT * FROM `author` WHERE `Last` = '$last'";
+        $find_author_query = mysqli_query($dbconnect, $find_author_sql);
+        $find_author_rs = mysqli_fetch_assoc($find_author_query);
+        
+        $new_authorID = $find_author_rs['Author_ID'];
+        echo "New Author ID:".$new_authorID;
+        
+        $author_ID = $new_authorID;
+        
+        
+    }   // end unknown author if
     
     // check quote name is not blank
     if ($quote == "Please type your quote here") {
@@ -212,15 +188,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tag_1_field = "tag-error";
         }
     
-    // Get subject ID's via get_subjectID function...
-    $subjectID_1 = get_subjectID($dbconnect, $tag_1);
-    $subjectID_2 = get_subjectID($dbconnect, $tag_2);
-    $subjectID_3 = get_subjectID($dbconnect, $tag_3);
+    
+    // Get subject ID's via get_ID function...
+    $subjectID_1 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_1);
+    $subjectID_2 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_2);
+    $subjectID_3 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_3);
     
     
     // add entry to database
     $addentry_sql = "INSERT INTO `quotes` (`ID`, `Author_ID`, `Quote`, `Notes`, `Subject1_ID`, `Subject2_ID`, `Subject3_ID`) VALUES (NULL, '$author_ID', '$quote', '$notes', '$subjectID_1', '$subjectID_2', '$subjectID_3');";
-    $addentry_query = mysqli_query($dbconnect, $addentry_sql);
+    $addentry_query = mysqli_query($dbconnect, $addentry_sql); 
     
     // get quote ID for next page
     
@@ -264,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Author's last name can't be blank
     </div>
     
-    <input class="add-field <?php echo $yob_field; ?>" type="text" name="last" value="<?php echo $last; ?>" placeholder="Author's Year of Birth" />
+    <input class="add-field <?php echo $yob_field; ?>" type="text" name="last" value="<?php echo $last; ?>" placeholder="Author's Last Name" />
             
     <br /><br />
     
@@ -299,7 +276,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Author's Year of Birth can't be blank
     </div>
     
-    <input class="add-field <?php echo $yob_field; ?>" type="text" name="yob" value="<?php echo $yob; ?>" placeholder="Author's First Name" />
+    <input class="add-field <?php echo $yob_field; ?>" type="text" name="yob" value="<?php echo $yob; ?>" placeholder="Author's year of birth" />
             
     <br /><br />
     
@@ -374,6 +351,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </form>
     
 </div>      <!-- end add entry div -->
+
 
 <!-- script to make autocomplete work -->
 <script>
