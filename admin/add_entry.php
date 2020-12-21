@@ -22,7 +22,6 @@ return $all_items;
 
 
 $author_ID = $_SESSION['Add_Quote'];
-echo $author_ID;
 
 // Get subject / topic list from database
 $all_tags_sql = "SELECT * FROM `subject` ORDER BY `Subject` ASC ";
@@ -200,6 +199,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $addentry_query = mysqli_query($dbconnect, $addentry_sql); 
     
     // get quote ID for next page
+    $get_quote_sql = "SELECT * FROM `quotes` WHERE `Quote` = '$quote'";
+    $get_quote_query = mysqli_query($dbconnect, $get_quote_sql);
+    $get_quote_rs = mysqli_fetch_assoc($get_quote_query);
+    
+    $quote_ID = $get_quote_rs['ID'];
+    $_SESSION['Quote_Success']=$quote_ID;
+    
+    
+    // Go to success page...
+    header('Location: index.php?page=quote_success');
     
 }   // end button pushed if
 
