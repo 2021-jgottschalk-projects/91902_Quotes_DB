@@ -11,7 +11,6 @@
                     
                     <a class="topnav" href="index.php?page=showall">All</a> | 
                     
-                    
                     <a class="topnav" href="index.php?page=recent">Recent</a> | 
                     <a class="topnav" href="index.php?page=random">Random</a> 
                 </div>  <!-- / common searches -->
@@ -37,9 +36,14 @@
                         
                     ?>
                     
-                    <a class="topnav" href="index.php?page=../admin/new_quote">Add Quote</a> | 
+                    <a href="#"></a>
                     
-                    <a class="topnav" href="index.php?page=../admin/logout">Logout</a>
+                    <!-- add quote in link -->      
+                    <a class="topnav top-icons" href="index.php?page=../admin/new_quote" title="Add a quote"><i class="fa fa-plus fa-2x"></i></a>
+                    
+                    &nbsp; &nbsp;
+                    
+                    <a class="topnav top-icons" href="index.php?page=../admin/logout" title="log out"><i class="fa fa-sign-out fa-2x"></i></a>
                     
                     <?php
                 }   // end in admin mode if
@@ -48,7 +52,7 @@
                     
                     ?>
                     
-                    <a class="topnav" href="index.php?page=../admin/login">Log In</a>
+                    <a class="topnav top-icons" href="index.php?page=../admin/login" title="log in"><i class="fa fa-sign-in fa-2x"></i></a>
                     
                     <?php
                     }   // end log in mode else

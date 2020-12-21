@@ -270,7 +270,7 @@ form {
 
 /* quick search submit button */
 .submit {
-    font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif; 
     position:relative;
     width: 45px;
     font-size: 14px;
@@ -344,6 +344,10 @@ textarea {
     
 }
 
+/* top icons */
+.top-icons {
+    font-size: 75%;
+}
 
 
 /* Form Error CSS */

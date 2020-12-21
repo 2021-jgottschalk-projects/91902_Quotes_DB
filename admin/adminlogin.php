@@ -32,7 +32,7 @@ if(isset($_REQUEST['login'])) {
 
 
 if (isset($_SESSION['admin'])) {
-	header('Location: index.php?page=../admin/admin_panel');
+	header('Location: index.php?page=../admin/new_quote');
 }
 
 
