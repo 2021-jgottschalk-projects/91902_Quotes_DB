@@ -14,20 +14,25 @@ $all_tags_sql = "SELECT * FROM `subject` ORDER BY `Subject` ASC ";
 $all_subjects = autocomplete_list($dbconnect, $all_tags_sql, 'Subject');
 
 
-// get country list from database
-$all_countries_sql="SELECT * FROM `country` ORDER BY `Country` ASC ";
-$all_countries = autocomplete_list($dbconnect, $all_countries_sql, 'Country');
-
-$all_occupations_sql = "SELECT * FROM `career` ORDER BY `Career` ASC ";
-$all_occupations = autocomplete_list($dbconnect, $all_occupations_sql, 'Career');
-
-
-// Get current data
+// Get quote and notes data
 $quote = $find_quote_rs['Quote'];
 $notes = $find_quote_rs['Notes'];
-$tag_1 = "";
-$tag_2 = "";
-$tag_3 = "";
+
+
+// Get subjects to populate tags..
+$subject1_ID = $find_quote_rs['Subject1_ID'];
+$subject2_ID = $find_quote_rs['Subject2_ID'];
+$subject3_ID = $find_quote_rs['Subject3_ID'];
+
+// retrieve subject names from subject table...
+$tag_1_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject1_ID");
+$tag_1 = $tag_1_rs['Subject'];
+
+$tag_2_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject2_ID");
+$tag_2 = $tag_2_rs['Subject'];
+
+$tag_3_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject3_ID");
+$tag_3 = $tag_3_rs['Subject'];
 
 // initialise tag ID's
 $tag_1_ID = $tag_2_ID = $tag_3_ID = 0;
@@ -296,19 +301,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Please enter at least one subject tag
     </div>
     <div class="autocomplete">
-        <input class="<?php echo $tag_1_field; ?>" id="subject1" type="text" name="Subject_1" placeholder="Subject 1(Start Typing)...">
+        <input class="<?php echo $tag_1_field; ?>" id="subject1" type="text" value="<?php echo $tag_1; ?>" name="Subject_1" placeholder="Subject 1(Start Typing)...">
     </div>
     
     <br/><br />
     
     <div class="autocomplete">
-        <input id="subject2" type="text" name="Subject_2" placeholder="Subject 2 (Start Typing, optional)...">
+        <input id="subject2" type="text" value="<?php echo $tag_2; ?>" name="Subject_2" placeholder="Subject 2 (Start Typing, optional)...">
     </div>
     
     <br/><br />
     
     <div class="autocomplete">
-        <input id="subject3" type="text" name="Subject_3" placeholder="Subject 3 (Start Typing, optional)...">
+        <input id="subject3" type="text" value="<?php echo $tag_3; ?>" name="Subject_3" placeholder="Subject 3 (Start Typing, optional)...">
     </div>
     
     <br/><br />
@@ -335,12 +340,6 @@ autocomplete(document.getElementById("subject1"), all_tags);
 autocomplete(document.getElementById("subject2"), all_tags);
 autocomplete(document.getElementById("subject3"), all_tags);
     
-var all_countries = <?php print("$all_countries"); ?>;
-autocomplete(document.getElementById("country1"), all_countries);
-autocomplete(document.getElementById("country2"), all_countries);
 
-var all_occupations = <?php print("$all_occupations"); ?>;
-autocomplete(document.getElementById("occupation1"), all_occupations);
-autocomplete(document.getElementById("occupation2"), all_occupations);
 
 </script>
