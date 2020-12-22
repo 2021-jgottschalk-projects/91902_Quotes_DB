@@ -63,7 +63,7 @@ if (isset($_SESSION['admin'])) {
         do {
             
             
-            $author_full = $all_authors_rs['First']." ".$all_authors_rs['Middle']." ".$all_authors_rs['Last'];
+            $author_full = $all_authors_rs['Last'].", ".$all_authors_rs['First']." ".$all_authors_rs['Middle'];
             
             ?>
             
