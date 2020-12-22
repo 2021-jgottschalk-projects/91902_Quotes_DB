@@ -1,4 +1,4 @@
-<?php echo $_REQUEST['ID']; 
+<?php
 
 // initialise variables
 $quote = "Please type your quote here";
@@ -6,6 +6,16 @@ $notes = "";
 $tag_1 = "";
 $tag_2 = "";
 $tag_3 = "";
+
+// initialise tag ID's
+$tag_1_ID = $tag_2_ID = $tag_3_ID = 0;
+
+$has_errors = "no";
+
+// set up error fields / visibility
+$quote_error = $tag_1_error =  "no-error";
+$quote_field = "form-ok";
+$tag_1_field = "tag-ok";
 
 // Put in error stuff here
 
@@ -25,18 +35,18 @@ $subject2_ID = $find_rs['Subject2_ID'];
 $subject3_ID = $find_rs['Subject3_ID'];
 
 // retrieve subject names from subject table...
-/*
-$tag_1_sql = "SELECT * FROM `subject` WHERE Subject_ID = $subject1_ID";
-$tag_1_query = mysqli_query($dbconnect, $tag_1_sql);
-$tag_1_rs = mysqli_fetch_assoc($tag_1_query);
-
-$tag_1 = $tag_1_rs['Subject']; */
-
 $tag_1_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject1_ID");
 $tag_1 = $tag_1_rs['Subject'];
 
+$tag_2_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject2_ID");
+$tag_2 = $tag_2_rs['Subject'];
+
+$tag_3_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject3_ID");
+$tag_3 = $tag_3_rs['Subject'];
+
 
 // if everything is ok, update databasee and show updated item
+
 
 // update database
 
@@ -72,13 +82,13 @@ $tag_1 = $tag_1_rs['Subject'];
     <br/><br />
     
     <div class="autocomplete">
-        <input id="subject2" type="text" name="Subject_2" placeholder="Subject 2 (Start Typing, optional)...">
+        <input id="subject2" type="text" name="Subject_2" value="<?php echo $tag_2; ?>" placeholder="Subject 2 (Start Typing, optional)...">
     </div>
     
     <br/><br />
     
     <div class="autocomplete">
-        <input id="subject3" type="text" name="Subject_3" placeholder="Subject 3 (Start Typing, optional)...">
+        <input id="subject3" type="text" name="Subject_3" value="<?php echo $tag_3; ?>" placeholder="Subject 3 (Start Typing, optional)...">
     </div>
     
     <br/><br />

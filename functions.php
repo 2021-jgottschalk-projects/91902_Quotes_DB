@@ -28,7 +28,7 @@ return $all_items;
 }
 
 
-// function to get subject, cuontry & career ID's
+// function to get subject, country & career ID's
 function get_ID($dbconnect, $table_name, $column_ID, $column_name, $entity)
 {
     
@@ -76,5 +76,6 @@ function get_rs($dbconnect, $sql)
     
     return $find_rs;
 }
+
 
 ?>
