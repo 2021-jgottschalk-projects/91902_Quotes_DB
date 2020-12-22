@@ -1,5 +1,9 @@
 <?php
 
+// Get subject / topic list from database
+$all_tags_sql = "SELECT * FROM `subject` ORDER BY `Subject` ASC ";
+$all_subjects = autocomplete_list($dbconnect, $all_tags_sql, 'Subject');
+
 // initialise variables
 $quote = "Please type your quote here";
 $notes = "";
@@ -20,9 +24,11 @@ $tag_1_field = "tag-ok";
 // Put in error stuff here
 
 // get content to populate form
-$ID=preg_replace('/[^0-9.]/','',$_REQUEST['ID']);
+// $ID=preg_replace('/[^0-9.]/','',$_REQUEST['ID']);
+$ID = 155;
+echo "ID: ".$ID.'<br />';
 
-$find_sql = "SELECT * from quotes WHERE ID = ".$ID;
+$find_sql = "SELECT * FROM `quotes` WHERE `ID` = $ID";
 $find_query = mysqli_query($dbconnect, $find_sql);
 $find_rs = mysqli_fetch_assoc($find_query);
 
@@ -45,12 +51,32 @@ $tag_3_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subj
 $tag_3 = $tag_3_rs['Subject'];
 
 
+// Code below excutes when the form is submitted...
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+// get items from form...
+$quote = mysqli_real_escape_string($dbconnect, $_POST['quote']);
+$notes = mysqli_real_escape_string($dbconnect, $_POST['notes']);
+$tag_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
+$tag_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
+$tag_3 = mysqli_real_escape_string($dbconnect, $_POST['Subject_3']);
+
+// Get subject ID's via get_ID function...
+$subjectID_1 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_1);
+$subjectID_2 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_2);
+$subjectID_3 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_3);
+    
 // if everything is ok, update databasee and show updated item
+$editentry_sql = "UPDATE `quotes` SET `Quote` = '$quote', `Notes` = '$notes', `Subject1_ID` = '$subject1_ID', `Subject2_ID` = '$subject2_ID', `Subject3_ID` = '$subject3_ID' WHERE `quotes`.`ID` = $ID;";
+$editentry_query = mysqli_query($dbconnect, $editentry_sql);
+$editentry_rs = mysqli_fetch_assoc($editentry_query);
 
+$_SESSION['Quote_Sucess']=$ID;
 
-// update database
+// Go to success page...
+// header('Location: index.php?page=quote_success');
 
-// show item
+} // end button puahed
 
 ?>
 
