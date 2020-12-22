@@ -11,6 +11,7 @@ $tag_1 = "";
 $tag_2 = "";
 $tag_3 = "";
 
+
 // initialise tag ID's
 $tag_1_ID = $tag_2_ID = $tag_3_ID = 0;
 
@@ -25,7 +26,8 @@ $tag_1_field = "tag-ok";
 
 // get content to populate form
 // $ID=preg_replace('/[^0-9.]/','',$_REQUEST['ID']);
-$ID = 155;
+echo "Request ID: ".$_REQUEST['ID']."<br />";
+$ID = $_REQUEST['ID'];
 echo "ID: ".$ID.'<br />';
 
 $find_sql = "SELECT * FROM `quotes` WHERE `ID` = $ID";
@@ -60,16 +62,23 @@ $notes = mysqli_real_escape_string($dbconnect, $_POST['notes']);
 $tag_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
 $tag_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
 $tag_3 = mysqli_real_escape_string($dbconnect, $_POST['Subject_3']);
+    
+echo "Tag 1: ".$tag_1."<br />";
+echo "Tag 2: ".$tag_2."<br />";
+echo "Tag 2: ".$tag_3."<br />";    
 
 // Get subject ID's via get_ID function...
-$subjectID_1 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_1);
-$subjectID_2 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_2);
-$subjectID_3 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_3);
+$new_subject_ID_1 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_1);
+$new_subject_ID_2 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_2);
+$new_subject_ID_3 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_3);
+    
+echo "Subject 1: ".$new_subject_ID_1."<br />";
+echo "Subject 2: ".$new_subject_ID_2."<br />";
+echo "Subject 2: ".$new_subject_ID_3."<br />";
     
 // if everything is ok, update databasee and show updated item
-$editentry_sql = "UPDATE `quotes` SET `Quote` = '$quote', `Notes` = '$notes', `Subject1_ID` = '$subject1_ID', `Subject2_ID` = '$subject2_ID', `Subject3_ID` = '$subject3_ID' WHERE `quotes`.`ID` = $ID;";
+$editentry_sql = "UPDATE `quotes` SET `Quote` = '$quote', `Notes` = '$notes', `Subject1_ID` = '$new_subject_ID_1', `Subject2_ID` = '$new_subject_ID_2', `Subject3_ID` = '$new_subject_ID_3' WHERE `quotes`.`ID` = $ID;";
 $editentry_query = mysqli_query($dbconnect, $editentry_sql);
-$editentry_rs = mysqli_fetch_assoc($editentry_query);
 
 $_SESSION['Quote_Sucess']=$ID;
 
