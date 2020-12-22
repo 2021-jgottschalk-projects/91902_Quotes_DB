@@ -42,13 +42,14 @@
         
         ?>
     <div class="edit-tools">
-    <p>Quote ID: <?php echo $find_rs['ID']?></p>
-                        <!-- add quote in link -->      
-    <a href="#" title="Edit quote"><i class="fa fa-edit fa-2x"></i></a>
+
+    
+    <!-- add quote in link -->      
+    <a href="index.php?page=../admin/editquote&ID=<?php echo $find_rs['ID']; ?>" title="Edit quote"><i class="fa fa-edit fa-2x"></i></a>
 
     &nbsp; &nbsp;
 
-    <a href="#" title="Delete quote"><i class="fa fa-trash fa-2x"></i></a>
+    <a href="index.php?page=../admin/deletequote_confirm&ID=<?php echo $find_rs['ID']; ?>" title="Delete quote"><i class="fa fa-trash fa-2x"></i></a>
     </div>
     
     <?php

@@ -41,7 +41,7 @@ if (isset($_SESSION['admin'])) {
     To add a quote, first select the author, then press the 'next' button.  If the author is not in the list, please choose the 'New Author' option.  To quickly find an author, click in the box below and start typing their <b>last</b> name.
 </i></p>
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/admin_panel");?>" enctype="multipart/form-data">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_quote");?>" enctype="multipart/form-data">
         
         <div class="">
             <b>Quote Author:</b>&nbsp; 
