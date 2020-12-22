@@ -38,7 +38,7 @@ if (isset($_SESSION['admin'])) {
 
 <h1>Add a Quote</h1>
 <p><i>
-    To add a quote, first select the author, then press the 'next' button.  If the author is not in the list, please choose the 'New Author' option.
+    To add a quote, first select the author, then press the 'next' button.  If the author is not in the list, please choose the 'New Author' option.  To quickly find an author, click in the box below and start typing their <b>last</b> name.
 </i></p>
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/admin_panel");?>" enctype="multipart/form-data">

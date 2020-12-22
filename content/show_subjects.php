@@ -17,6 +17,7 @@
         
     ?>
     
+    <!-- show subjects -->
     <span class="tag">
         <a href="index.php?page=subject&subjectID=<?php echo $sub_rs['Subject_ID']; ?>">
             <?php echo $sub_rs['Subject']; ?></a>
@@ -32,7 +33,27 @@
     // break reference with the last element as per the manual
     unset($subject);
         
-    }
+
+    }   // end subject loop
+    
+    
+    // if logged in, show edit / delete options...
+    if (isset($_SESSION['admin'])) {
+        
+        ?>
+    <div class="edit-tools">
+    <p>Quote ID: <?php echo $find_rs['ID']?></p>
+                        <!-- add quote in link -->      
+    <a href="#" title="Edit quote"><i class="fa fa-edit fa-2x"></i></a>
+
+    &nbsp; &nbsp;
+
+    <a href="#" title="Delete quote"><i class="fa fa-trash fa-2x"></i></a>
+    </div>
+    
+    <?php
+        
+    }   // end logged in if showing editing tools
     
     ?>
     
