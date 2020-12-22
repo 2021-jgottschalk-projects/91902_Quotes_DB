@@ -25,10 +25,14 @@ $subject2_ID = $find_rs['Subject2_ID'];
 $subject3_ID = $find_rs['Subject3_ID'];
 
 // retrieve subject names from subject table...
+/*
 $tag_1_sql = "SELECT * FROM `subject` WHERE Subject_ID = $subject1_ID";
 $tag_1_query = mysqli_query($dbconnect, $tag_1_sql);
 $tag_1_rs = mysqli_fetch_assoc($tag_1_query);
 
+$tag_1 = $tag_1_rs['Subject']; */
+
+$tag_1_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject1_ID");
 $tag_1 = $tag_1_rs['Subject'];
 
 

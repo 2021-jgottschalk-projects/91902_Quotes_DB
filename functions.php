@@ -67,4 +67,14 @@ function get_ID($dbconnect, $table_name, $column_ID, $column_name, $entity)
     
 } // end get ID function
 
+
+function get_rs($dbconnect, $sql)
+{
+    $find_sql = $sql;
+    $find_query = mysqli_query($dbconnect, $find_sql);
+    $find_rs = mysqli_fetch_assoc($find_query);
+    
+    return $find_rs;
+}
+
 ?>
