@@ -88,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $occupation_1 = mysqli_real_escape_string($dbconnect, $_POST['occupation1']);
     $occupation_2 = mysqli_real_escape_string($dbconnect, $_POST['occupation2']);    
 
+    
     // get country and occupation IDs
     $countryID_1 = get_ID($dbconnect, 'country', 'Country_ID', 'Country', $country_1);
     $countryID_2 = get_ID($dbconnect, 'country', 'Country_ID', 'Country', $country_2);
@@ -96,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $occupationID_2 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_2);
 
     // edit entry to database
-$editauthor_sql = "UPDATE `author` SET `First` = '$first', `Last` = '$last', `Gender` = '$gender_code', `Born` = '$yob', `Country1_ID` = '$country1_ID', `Country2_ID` = '$country2_ID', `Career1_ID` = '$occupation1_ID', `Career2_ID` = '$occupation2_ID' WHERE `author`.`Author_ID` = $author_ID;";
+$editauthor_sql = "UPDATE `author` SET `First` = '$first', `Last` = '$last', `Gender` = '$gender_code', `Born` = '$yob', `Country1_ID` = '$countryID_1', `Country2_ID` = '$countryID_2', `Career1_ID` = '$occupationID_1', `Career2_ID` = '$occupationID_2' WHERE `author`.`Author_ID` = $author_ID;";
 $editentry_author = mysqli_query($dbconnect, $editauthor_sql);
     
     // get author ID and go to author success page
